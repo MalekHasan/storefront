@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-function Header() {
+import { connect } from 'react-redux';
+function Header(props) {
   return (
     <Box >
       <AppBar position="static"
@@ -13,11 +13,12 @@ function Header() {
           <Typography variant="h4" component="p" sx={{ color:"black","&:hover":{bgcolor:"rgba(0,0,0,0.05)"},p:1 }}>
             OUR STORE
           </Typography>
-          <Button  sx={{color:"black"  }}>CART ({0})</Button>
+          <Button  sx={{color:"black"  }}>CART ({props.myCart.items.length})</Button>
         </Toolbar>
       </AppBar>
     </Box>
   )
-}
-
-export default Header;
+}const mapStateToProps = (state) => ({
+  myCart:state.myCart
+})
+export default connect(mapStateToProps)(Header);

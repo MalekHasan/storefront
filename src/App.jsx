@@ -1,15 +1,17 @@
-import Header from "./components/Header/Header.jsx";
-import Categories from "./components/Categories/Categories.jsx";
+
 import "./App.css";
-import Products from "./components/Products/Products.jsx";
+import { Route, Routes } from "react-router-dom";
+import ActiveProduct from './components/ActiveProduct/ActiveProduct';
+import Layout from "./components/Layout/Layout.jsx";
 
 function App() {
-
   return (
     <>
-      <Header />
-      <Categories />
-      <Products/>
+
+      <Routes>
+      <Route path="/" element={<Layout/>}/>
+      <Route path="/product/:name" element={<ActiveProduct/>}/>
+      </Routes>
     </>
   );
 }

@@ -8,7 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import {connect} from "react-redux";
-import {FILTER_CAT} from "../../store/products";
+import {FILTER_CAT,setActiveProduct} from "../../store/products";
+import {addItemToCart} from "../../store/cart";
+import { Link } from "react-router-dom";
 function Products(props) {
   return (
     <>
@@ -43,7 +45,7 @@ function Products(props) {
             <Card sx={{ width: 280, widthidth: 345, mt: 15 }}>
             <CardMedia
               sx={{ height: 140 }}
-              image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+              image={product.img}
               title="green iguana"
             />
             <CardContent>
@@ -57,8 +59,8 @@ function Products(props) {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">ADD TO CARD</Button>
-              <Button size="small">VIEW DETAILES </Button>
+              <Button size="small" onClick={()=>props.addItemToCart(product)}>ADD TO CARD</Button>
+              <Link style={{textDecoration:"none",color:"#1976d2",fontFamily:` "Roboto","Helvetica","Arial",sans-serif`,fontSize:"0.8125rem"}} to={`product/${product.name}`} size="small" onClick={()=>props.setActiveProduct(product)}>VIEW DETAILES </Link>
             </CardActions>
           </Card>
             </>
@@ -74,9 +76,10 @@ function Products(props) {
 }
 const mapStateToProps = (state) => ({
   myActiveCategory: state.myActiveCategory,
-  myProductsList:state.myProductsList
+  myProductsList:state.myProductsList,
+  myCart:state.myCart
 })
 
-const mapDispatchToProps = {FILTER_CAT };
+const mapDispatchToProps = {FILTER_CAT,setActiveProduct ,addItemToCart};
 
 export default connect(mapStateToProps,mapDispatchToProps)(Products);
